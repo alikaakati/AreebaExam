@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://epayment.areeba.com/checkout/version/55/checkout.js" data-error="errorCallback" data-cancel="cancelCallback" data-complete="completeCallBack"></script>
+    <script src="./index.js">
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="leftcontainer">
+            <h1>Save the puppies !</h1><br>
+            <h4>Every donation counts.<br>We Are a group of young people trying to raise enough money so the puppies can have shelter</h4>
+            <button type="button" id="lighthouse" onclick="disableButtons();Checkout.showLightbox()">Donate on this page</button>
+            <button type="button" id="paymentpage" onclick="disableButtons();Checkout.showPaymentPage();">Donate on another page</button>
+            <p id="msg"></p>
+        </div>
+        <div class="rightcontainer"></div>
+    </div>
+
+    <script>
+        let cUrl = "https://epayment.areeba.com/api/rest/version/55/merchant/test222201363002/order/uniqueorderID16161616; "
+        errorCallback = (error) => {
+            window.location.href = "http://localhost/examAreeba/";
+            document.getElementById('msg').innerHTML = "An error occured while donating :(";
+        }
+        cancelCallback = () => {
+            window.location.href = "http://localhost/examAreeba/";
+            fetch(cUrl , {
+                method:'GET',
+                headers : {
+                    'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+                },
+            }).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.log(err))
+            document.getElementById('msg').innerHTML = "These puppies will be sad that you cancelled the donation :C";
+
+        }
+        completeCallBack = () =>{
+            window.location.href = "http://localhost/examAreeba/";
+            document.getElementById('msg').innerHTML = "Thanks for making this world a better place C:";
+        }
+    </script>
+
+        
+
+</body>
+</html>
+
+
