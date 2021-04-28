@@ -5,7 +5,6 @@ disableButtons = () =>{
     document.getElementById('paymentpage').style.cursor = 0.8;
 }
 enableButtons = () =>{
-    alert('enabling buttons');
     document.getElementById('lighthouse').disabled = false;
     document.getElementById('lighthouse').style.cursor = 1;
     document.getElementById('paymentpage').disabled = false;
@@ -20,7 +19,6 @@ fetch('newOrder.php', {
     body: {},
 }).then(response => response.json() ).then(result=>{
     uniqueOrderID = result;
-    console.log(uniqueOrderID);
     let url = `https://epayment.areeba.com/api/rest/version/55/merchant/${userID}/session`;
 
     fetch(url,{
