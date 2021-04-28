@@ -1,20 +1,35 @@
+disableButtons = () =>{
+    document.getElementById('lighthouse').disabled = true;
+    document.getElementById('lighthouse').style.opacity = 0.8;
+    document.getElementById('paymentpage').disabled = true;
+    document.getElementById('paymentpage').style.cursor = 0.8;
+}
+enableButtons = () =>{
+    alert('enabling buttons');
+    document.getElementById('lighthouse').disabled = false;
+    document.getElementById('lighthouse').style.cursor = 1;
+    document.getElementById('paymentpage').disabled = false;
+    document.getElementById('paymentpage').style.cursor = 1;
+}
 let username = "merchant.test222201363002";
 let userID = "test222201363002";
 let password = "5881eea53e5d11596e74b0c0a32efe7f";
-let uniqueOrderID = "uniqueorderID16161616"
-let sessionID = "";
-let url = `https://epayment.areeba.com/api/rest/version/55/merchant/${userID}/session`;
-disableButtons = () =>{
-    document.getElementById('lighthouse').disabled = true;
-    document.getElementById('lighthouse').style.cursor = "not-allowed";
-    document.getElementById('paymentpage').disabled = true;
-    document.getElementById('paymentpage').style.cursor = "not-allowed";
-}
+let uniqueOrderID = "";
+fetch('newOrder.php', {
+    method: 'POST',
+    body: {},
+}).then(response => response.json() ).then(result=>{
+    uniqueOrderID = result;
+    console.log(uniqueOrderID);
+    let url = `https://epayment.areeba.com/api/rest/version/55/merchant/${userID}/session`;
 
     fetch(url,{
         method:'POST',
         headers : {
             'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+            'Access-Control-Allow-Origin':'*',
+            'Allow-Control-Allow-Origin':'*',
+            'Content-Type':'application/json'
         },
         body:JSON.stringify({
             "apiOperation": "CREATE_CHECKOUT_SESSION", 
@@ -54,3 +69,5 @@ disableButtons = () =>{
         });
     }).catch(err => console.log(err));
 
+
+});;

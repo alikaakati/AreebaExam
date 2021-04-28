@@ -1,0 +1,5 @@
+CREATE DATABASE areebaExam;
+CREATE TABLE orders(
+    ID int NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (ID)
+);

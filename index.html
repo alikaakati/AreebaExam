@@ -25,25 +25,68 @@
     </div>
 
     <script>
-        let cUrl = "https://epayment.areeba.com/api/rest/version/55/merchant/test222201363002/order/uniqueorderID16161616; "
         errorCallback = (error) => {
-            window.location.href = "http://localhost/examAreeba/";
-            document.getElementById('msg').innerHTML = "An error occured while donating :(";
+            fetch('newOrder.php', {
+                method: 'POST',
+                body: {},
+            }).then(response => response.json() ).then(result=>{
+                let cUrl = "https://epayment.areeba.com/api/rest/version/55/merchant/test222201363002/order/"+result;
+                if(window.location.href != "http://localhost/examAreeba/"){
+                    console.log(window.location.href);
+                    window.location.href = "http://localhost/examAreeba/";
+                }
+                fetch(cUrl , {
+                    method:'GET',
+                    headers : {
+                        'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+                    },
+                }).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.log(err))
+                document.getElementById('msg').innerHTML = "An error occured while donation :C";
+                enableButtons();
+            });
+
         }
         cancelCallback = () => {
-            window.location.href = "http://localhost/examAreeba/";
-            fetch(cUrl , {
-                method:'GET',
-                headers : {
-                    'Authorization': 'Basic ' + btoa(`${username}:${password}`),
-                },
-            }).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.log(err))
-            document.getElementById('msg').innerHTML = "These puppies will be sad that you cancelled the donation :C";
+            fetch('newOrder.php', {
+                method: 'POST',
+                body: {},
+            }).then(response => response.json() ).then(result=>{
+                let cUrl = "https://epayment.areeba.com/api/rest/version/55/merchant/test222201363002/order/"+result;
+                if(window.location.href != "http://localhost/examAreeba/"){
+                    console.log(window.location.href);
+                    window.location.href = "http://localhost/examAreeba/";
+                }
+                fetch(cUrl , {
+                    method:'GET',
+                    headers : {
+                        'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+                    },
+                }).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.log(err))
+                document.getElementById('msg').innerHTML = "These puppies will be sad that you cancelled the donation :C";
+                enableButtons();
+            });
 
         }
         completeCallBack = () =>{
-            window.location.href = "http://localhost/examAreeba/";
-            document.getElementById('msg').innerHTML = "Thanks for making this world a better place C:";
+            fetch('newOrder.php', {
+                method: 'POST',
+                body: {},
+            }).then(response => response.json() ).then(result=>{
+                let cUrl = "https://epayment.areeba.com/api/rest/version/55/merchant/test222201363002/order/"+result;
+                if(window.location.href != "http://localhost/examAreeba/"){
+                    console.log(window.location.href);
+                    window.location.href = "http://localhost/examAreeba/";
+                }
+                fetch(cUrl , {
+                    method:'GET',
+                    headers : {
+                        'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+                    },
+                }).then(resp => resp.json()).then(data => console.log(data)).catch(err => console.log(err))
+                document.getElementById('msg').innerHTML = "Thanks for making this world a better place C:"
+                enableButtons();
+            });
+
         }
     </script>
 
